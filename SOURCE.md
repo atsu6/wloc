@@ -1,6 +1,6 @@
 # Source / provenance
 
-このリポジトリのShadowrocket用設定は、SourceForgeから取得した **Apple WLOC v1.1.0 source code.zip** を基準に確認しています。
+このリポジトリは、SourceForgeから取得した **Apple WLOC v1.1.0 source code.zip** を基準に復元しています。
 
 ## 元ソース
 
@@ -9,25 +9,27 @@
 - 対象コミット: `ecd4992a7c92b7d6e92eb80b948eba54202ab85a`
 - コミット日時: 2026-08-08
 
-## ZIP内ファイルのSHA-256
+## SourceForge v1.1.0で確認したSHA-256
 
 ```text
 wloc.js
-A1B361E60F0B434585260FB59C65D1DDBE3BFF89ACE3639F592E7D8AF432B3C1
+a1b361e60f0b434585260fb59c65d1ddbe3bff89ace3639f592e7d8af432b3c1
 
 wloc-settings.js
-433073EED20064EE59CAFC857EB444E0BCC958290323AC7586A77093776D8F42
+433073eed20064ee59cafc857eb444e0bcc958290323ac7586a77093776d8f42
 
 wloc.module（元ファイル）
-06ACD0530CEF9BF0E5BD460AC3F7B95179E09EDB29406D43CF2F66CCA EBC4071
-```
-
-`wloc.module` の正規SHA-256は次です。
-
-```text
 06acd0530cef9bf0e5bd460ac3f7b95179e09edb29406d43cf2f66ccaebc4071
 ```
 
-元 `modules/wloc.module` は消滅した `Yu9191/wloc` の `main` を参照していたため、このリポジトリの `modules/wloc.module` では、同内容が確認できるミラーの **不変コミット `ecd4992...`** をscript-pathに固定しています。
+## 取り込み方法
 
-これにより、Shadowrocketへ追加する入口URLは `atsu6/wloc` 固定になります。
+`.github/workflows/vendor-wloc.yml` が元コミットから以下を取得します。
+
+- `dist/wloc.js`
+- `dist/wloc-settings.js`
+- `source/wloc.module.original`
+
+取得後に上記SHA-256を検証し、一致したファイルだけをこのリポジトリへコミットします。
+
+Shadowrocket用の `modules/wloc.module` は、実行スクリプトとしてこのリポジトリ自身の `dist/` を参照します。
