@@ -43,13 +43,18 @@ Appleマップで目的地を長押し → **共有** → `wloc 设置地理位�
 
 反映されない場合は、位置情報サービスをOFF/ON。それでも変わらなければiPhoneを再起動します。
 
-## 構成について
+## このリポジトリだけで動作します
 
-Shadowrocketへ登録する入口は、この `atsu6/wloc` リポジトリです。
+`modules/wloc.module` は次の2ファイルを **この `atsu6/wloc` リポジトリから直接読み込みます**。
 
-`modules/wloc.module` 内の実行JSは、SourceForge v1.1.0と照合した元コミット `ecd4992...` の不変URLに固定しています。そのため、消滅した元リポジトリの `main` ブランチ更新には依存しません。
+```text
+https://raw.githubusercontent.com/atsu6/wloc/main/dist/wloc.js
+https://raw.githubusercontent.com/atsu6/wloc/main/dist/wloc-settings.js
+```
 
-照合情報は [`SOURCE.md`](SOURCE.md) に記載しています。
+`dist/` の2ファイルは、元コミット `ecd4992...` から取得した後、SourceForge v1.1.0で確認したSHA-256と一致した場合だけGitHub Actionsが保存する構成です。
+
+元の `wloc.module` も `source/wloc.module.original` として保存しています。照合情報は [`SOURCE.md`](SOURCE.md) を参照してください。
 
 ## 注意
 
