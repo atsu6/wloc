@@ -1,0 +1,47 @@
+name: Vendor verified WLOC v1.1.0
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/vendor-wloc.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download pinned original files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist source
+          BASE='https://raw.githubusercontent.com/gitcharlesch/Yu9191-wloc/ecd4992a7c92b7d6e92eb80b948eba54202ab85a'
+          curl -fsSL "$BASE/dist/wloc.js" -o dist/wloc.js
+          curl -fsSL "$BASE/dist/wloc-settings.js" -o dist/wloc-settings.js
+          curl -fsSL "$BASE/modules/wloc.module" -o source/wloc.module.original
+
+      - name: Verify SourceForge v1.1.0 hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'a1b361e60f0b434585260fb59c65d1ddbe3bff89ace3639f592e7d8af432b3c1  dist/wloc.js' | sha256sum -c -
+          echo '433073eed20064ee59cafc857eb444e0bcc958290323ac7586a77093776d8f42  dist/wloc-settings.js' | sha256sum -c -
+          echo '06acd0530cef9bf0e5bd460ac3f7b95179e09edb29406d43cf2f66ccaebc4071  source/wloc.module.original' | sha256sum -c -
+
+      - name: Commit vendored files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist source
+          if ! git diff --cached --quiet; then
+            git commit -m 'Vendor verified WLOC v1.1.0 source files'
+            git push
+          fi
