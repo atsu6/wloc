@@ -2,15 +2,12 @@ name: Vendor verified WLOC v1.1.0
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   contents: write
 
 jobs:
   vendor:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
