@@ -1,4 +1,4 @@
-# Apple WLOC – Shadowrocket用ミラー
+# Apple WLOC – Shadowrocket用
 
 SourceForge の **Apple WLOC v1.1.0 mirror** を基準にした、iPhone / Shadowrocket 用の個人ミラーです。
 
