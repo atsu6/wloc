@@ -1,10 +1,6 @@
 # Apple WLOC – Shadowrocket用
 
 SourceForge の **Apple WLOC v1.1.0 mirror** を基準にした、iPhone / Shadowrocket 用の個人ミラーです。
-
-- 元プロジェクト: `Yu9191/wloc`
-- 元コミット: `ecd4992a7c92b7d6e92eb80b948eba54202ab85a`
-- 保存元: https://sourceforge.net/projects/apple-wloc.mirror/
 - 用途: Apple のネットワーク測位（Wi‑Fi / 基地局）の返却座標を Shadowrocket で書き換える
 
 ## 1. Shadowrocketへ追加
